@@ -1,3 +1,432 @@
+/* ==========================================================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================================================== */
+:root {
+  /* Elegant, low-contrast color palette */
+  --color-bg-main: #f8f9fa;
+  --color-bg-card: #ffffff;
+  --color-bg-secondary: #f1f3f5;
+  
+  --color-border-primary: #121212;
+  --color-border-secondary: #dee2e6;
+  --color-border-tertiary: #e9ecef;
+  
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6c757d;
+  --color-text-tertiary: #adb5bd;
+  
+  /* Brand accents (used sparingly for active items/chips) */
+  --color-accent: #5c54e5;
+  --color-accent-light: #f0efff;
+  --color-accent-border: #c6c2fa;
+  
+  /* Semantic Badges */
+  --bg-badge-success: #e6f4ea;
+  --text-badge-success: #137333;
+  --bg-badge-warning: #fef7e0;
+  --text-badge-warning: #b06000;
+  
+  /* Strict structural geometric constants */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition-smooth: all 0.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+/* Dark Mode Overrides (Automatic system matching) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-main: #0a0a0c;
+    --color-bg-card: #121215;
+    --color-bg-secondary: #1a1a22;
+    
+    --color-border-primary: #ffffff;
+    --color-border-secondary: #2d2d34;
+    --color-border-tertiary: #202024;
+    
+    --color-text-primary: #f5f5f7;
+    --color-text-secondary: #9ea4b0;
+    --color-text-tertiary: #636975;
+    
+    --color-accent: #7f77dd;
+    --color-accent-light: #1b1933;
+    --color-accent-border: #433e85;
+    
+    --bg-badge-success: #0f2916;
+    --text-badge-success: #81c995;
+    --bg-badge-warning: #2d2206;
+    --text-badge-warning: #fdd663;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+/* ==========================================================================
+   2. CONTAINERS & CARDS
+   ========================================================================== */
+.vb-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: var(--transition-smooth);
+}
+
+.vb-card:hover {
+  border-color: var(--color-border-secondary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.vb-st {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vb-div {
+  border: none;
+  border-top: 1px solid var(--color-border-tertiary);
+  margin: 1.5rem 0;
+}
+
+/* Grids */
+.vb-grid2, .vb-grid3 {
+  display: grid;
+  gap: 12px;
+}
+.vb-grid2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.vb-grid3 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+
+/* ==========================================================================
+   3. TYPOGRAPHY & LABELS
+   ========================================================================== */
+.vb-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   4. FORM ELEMENTS & INPUTS
+   ========================================================================== */
+.vb-fr {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vb-fr label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.vb-fr input[type="text"],
+.vb-fr textarea,
+.vb-fr select {
+  width: 100%;
+  font-size: 0.875rem;
+  font-family: inherit;
+  padding: 10px 14px;
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-md);
+  transition: var(--transition-smooth);
+  outline: none;
+}
+
+.vb-fr input:focus,
+.vb-fr textarea:focus,
+.vb-fr select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+/* Range Inputs / Sliders */
+.vb-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.vb-row label {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  min-width: 120px;
+}
+
+.vb-row input[type="range"] {
+  flex: 1;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border-secondary);
+  outline: none;
+}
+
+.vb-row input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-text-primary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.vb-row input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.vb-row .ro {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: right;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   5. INTERACTIVE CHIPS & BUTTONS
+   ========================================================================== */
+.vb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.vb-chip {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-secondary);
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.vb-chip:hover {
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-primary);
+}
+
+/* Active Highlight Chip State */
+.vb-chip.on-purple {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* Interactive Submission Trigger */
+.vb-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 14px;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-border-primary);
+  color: var(--color-bg-card);
+  transition: var(--transition-smooth);
+}
+
+.vb-send:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.vb-send:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* ==========================================================================
+   6. METRICS & SPECIFIC PREVIEWS
+   ========================================================================== */
+.vb-metric {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+}
+
+.vb-metric .n {
+  font-family: var(--font-mono);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.vb-metric .l {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* Pre-formatted Outputs (JSON & Plain Text Code Blocks) */
+.vb-json, .vb-plain {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-top: 10px;
+}
+
+.vb-json {
+  background: #0f141c;
+  border: 1px solid #1e2633;
+  color: #a5b4fc;
+}
+
+.vb-plain {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-tertiary);
+  color: var(--color-text-primary);
+}
+
+/* File Drop Zone UI */
+.vb-drop {
+  height: 160px;
+  border: 2px dashed var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-main);
+  transition: var(--transition-smooth);
+}
+
+.vb-drop:hover {
+  border-color: var(--color-text-secondary);
+}
+
+.vb-drop.drag {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+/* Semantic Micro-Badges */
+.vb-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+/* Specific badge variants for semantic meaning */
+
+/* ==========================================================================
+   MINIMALIST CUSTOM SELECT DROPDOWN
+   ========================================================================== */
+.vb-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.vb-select {
+  appearance: none; /* Removes native browser arrows */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  width: 100%;
+  font-family: var(--font-global);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 12px 40px 12px 16px; /* Extra right padding so text doesn't overlap arrow */
+  background: var(--bg-app);
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-box);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  outline: none;
+}
+
+/* Hover and Interaction State */
+.vb-select:hover {
+  border-color: var(--text-ghost);
+}
+
+.vb-select:focus {
+  border-color: var(--border-strong);
+  background: var(--bg-surface);
+}
+
+/* Custom Minimalist Chevron Down Indicator */
+.vb-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none; /* Keeps the click working on the dropdown below */
+  transition: var(--transition-fast);
+}
+
+.vb-select-wrapper:focus-within::after {
+  border-color: var(--border-strong);
+}
+
+/* Dropdown Options List Pane styling */
+.vb-select option {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-family: var(--font-global);
+  padding: 10px;
+}
+
+/* ADDED DESIGN FOR SEMANTIC BADGES */
+
+.vb-badge.pink, .vb-badge.amber { background: var(--bg-badge-warning); color: var(--text-badge-warning); }
+.vb-badge.blue { background: var(--bg-badge-success); color: var(--text-badge-success); }
 *{box-sizing:border-box}
 .vb-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
 .vb-lbl{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:8px}

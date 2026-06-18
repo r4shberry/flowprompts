@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h2 class="sr-only">Builder that emits locked prompts for single-speaker video clips, a two-person hook-script mode, an identity-locked image-generation mode (JSON), and a product-hold mode that outputs a plain-text image prompt of the reference subject holding a specified product.</h2>
+<h1 class="sr-only">Prompt Builder 1.0</h1>
 
 <div style="padding:1rem 0 0.5rem">
   <div class="vb-card">
@@ -418,7 +418,24 @@
     <button class="vb-send" onclick="vbSend()"><i class="ti ti-wand" id="vbSendIcon" style="font-size:16px" aria-hidden="true"></i> <span id="vbSendTxt">Send to chat — build Jamaican JSON clips ↗</span></button>
   </div>
 
+  <!-- THE MINIMALIST DROPDOWN MODE SWITCHER -->
+<div class="vb-card">
+  <div class="vb-fr">
+    <label for="modeSelector">Active Operation Mode</label>
+    <div class="vb-select-wrapper">
+      <select id="modeSelector" class="vb-select" onchange="vbSetMode(this.value)">
+        <option value="script" selected>Full script → clips</option>
+        <option value="single">Single clip</option>
+        <option value="hook">Hook script (2-person)</option>
+        <option value="image">Image (identity + background)</option>
+        <option value="product">Product hold (plain text)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
   <script src="system.js"></script>
+
 </div>
 </body>
 </html>
