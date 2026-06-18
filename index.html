@@ -418,24 +418,27 @@
     <button class="vb-send" onclick="vbSend()"><i class="ti ti-wand" id="vbSendIcon" style="font-size:16px" aria-hidden="true"></i> <span id="vbSendTxt">Send to chat — build Jamaican JSON clips ↗</span></button>
   </div>
 
-  <!-- THE MINIMALIST DROPDOWN MODE SWITCHER -->
-<div class="vb-card">
-  <div class="vb-fr">
-    <label for="modeSelector">Active Operation Mode</label>
-    <div class="vb-select-wrapper">
-      <select id="modeSelector" class="vb-select" onchange="vbSetMode(this.value)">
-        <option value="script" selected>Full script → clips</option>
-        <option value="single">Single clip</option>
-        <option value="hook">Hook script (2-person)</option>
-        <option value="image">Image (identity + background)</option>
-        <option value="product">Product hold (plain text)</option>
-      </select>
+  <div class="vb-card">
+    <div class="vb-st">
+      <i class="ti ti-microphone-2" aria-hidden="true"></i> 
+      Voice Profile 
+      <span class="vb-badge pink">Authentic Profile</span>
     </div>
-  </div>
+    
+    <div class="vb-grid2">
+      <div class="vb-fr">
+        <label for="vspeed">Speech Speed</label>
+        <input type="text" id="vspeed" value="moderately fast">
+      </div>
+      <div class="vb-fr">
+        <label for="vpace">Natural Pace</label>
+        <input type="text" id="vpace" value="conversational">
+      </div>
+    </div>
 </div>
 
   <script src="system.js"></script>
-
+  
 </div>
 </body>
 </html>
